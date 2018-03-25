@@ -1,4 +1,13 @@
+h1 {
+  text-align: center;
+}
+
 .thumbnail img {
   width: 200px;
   height: 150px;
+}
+
+.formstyle {
+  width: 30%;
+  margin: 0 auto;
 }
