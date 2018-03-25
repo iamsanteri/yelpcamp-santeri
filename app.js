@@ -6,7 +6,7 @@ var mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost/yelpcamp");
 
 app.use(bodyParser.urlencoded({extended: true}));
-app.use("/styles", express.static(__dirname + "/styles"));
+app.use(express.static("styles"));
 app.set("view engine", "ejs");
 
 var campgrounds = [
