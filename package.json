@@ -1,0 +1,23 @@
+{
+  "name": "yelpcamp",
+  "version": "1.0.0",
+  "description": "Yelpcamp tutorial application.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamsanteri/yelpcamp-santeri.git"
+  },
+  "author": "Santeri Liukkonen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iamsanteri/yelpcamp-santeri/issues"
+  },
+  "homepage": "https://github.com/iamsanteri/yelpcamp-santeri#readme",
+  "dependencies": {
+    "ejs": "^2.5.7",
+    "express": "^4.16.3"
+  }
+}
