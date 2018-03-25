@@ -1,6 +1,9 @@
 var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
+var mongoose = require("mongoose");
+
+mongoose.connect("mongodb://localhost/yelpcamp");
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use("/styles", express.static(__dirname + "/styles"));
