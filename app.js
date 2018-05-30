@@ -2,6 +2,8 @@ var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
+var Campground = require("./models/campground");
+var seedDB = require("./seeds");
 
 mongoose.connect("mongodb://localhost/yelpcamp");
 
@@ -9,30 +11,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("styles"));
 app.set("view engine", "ejs");
 
-// SCHEMA SETUP
-var campgroundSchema = new mongoose.Schema({
-  name: String,
-  image: String,
-  description: String
-});
-
-var Campground = mongoose.model("Campground", campgroundSchema);
-
-// Syntetic creation of an element on startup if needed:
-
-/*  Campground.create({
-    name: "Pirkkolan Leirialue",
-    image: "https://mw2.google.com/mw-panoramio/photos/medium/2652538.jpg",
-    description: "This is a nice campground in Finland. Especially good for children."
-  }, function(err, campground){
-    if(err) {
-      console.log(err);
-    } else {
-      console.log("Newly created campground: ");
-      console.log("campground");
-    }
-  });
-*/
+// Removes all campgrounds and seeds the database
+seedDB();
 
 app.get("/", function(req, res) {
   res.render("landing");
@@ -73,11 +53,12 @@ app.get("/campgrounds/new", (req, res) => {
 
 // SHOW - shows more info about one campground
 app.get("/campgrounds/:id", (req, res) => {
-  Campground.findById(req.params.id, function(err, foundCampground) {
+  Campground.findById(req.params.id).populate("comments").exec(function(err, foundCampground) {
     if(err) {
       console.log(err);
 
     } else {
+      console.log(foundCampground);
       res.render("show", {campground: foundCampground});
     }
   });
