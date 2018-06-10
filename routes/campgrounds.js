@@ -54,13 +54,31 @@ router.get("/:id", (req, res) => {
   });
 });
 
-// Middleware
-function isLoggedIn(req, res, next) {
-  if(req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect("/login");
-}
+// EDIT CAMPGROUND ROUTE
+router.get("/:id/edit", function(req, res) {
+  Campground.findById(req.params.id, function(err, foundCampground) {
+    if(err){
+      res.redirect("/campgrounds")
+    } else {
+      res.render("campgrounds/edit", {campground: foundCampground});
+    }
+  });
+});
+
+// UPDATE CAMPGROUND ROUTE
+router.put("/:id", function(req, res) {
+  // Find and update the correct campground
+  Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(err, updatedCampground) {
+    if(err) {
+      res.redirect("/campgrounds");
+      console.log(err);
+    } else {
+      res.redirect("/campgrounds/" + req.params.id);
+      console.log("Successful edit.");
+    }
+  });
+  // Redirect to the show page
+});
 
 // Middleware
 function isLoggedIn(req, res, next) {
