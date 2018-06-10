@@ -20,8 +20,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("styles"));
 app.set("view engine", "ejs");
 
-// Removes all campgrounds and seeds the database
-seedDB();
+// seedDB(); // Seed the database
 
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({
