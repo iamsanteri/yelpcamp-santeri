@@ -16,6 +16,10 @@ var commentRoutes = require("./routes/comments");
 var campgroundRoutes = require("./routes/campgrounds");
 var indexRoutes = require("./routes/index");
 
+// Setup environment variable defaults
+var url = process.env.DATABASEURL || "mongodb://localhost/yelpcamp"
+var portEnv = process.env.PORT || 3000;
+
 // mongoose.connect("mongodb://localhost/yelpcamp");
 mongoose.connect(process.env.DATABASEURL);
 
